@@ -20,8 +20,7 @@ public class Tigger {
                 System.out.println("    Here are the tasks in your list:\n");
                 for (int i = 0; i < list.size(); i++){
                     Task current = list.get(i);
-                    System.out.println("    " + (i + 1) + ". [" + current.getStatusIcon() + "] "
-                            + current.getDescription());
+                    System.out.println("    " + (i + 1) + ". " + current.toString());
                 }
                 System.out.println("    ____________________________________________________________\n");
             } else if (command.startsWith("mark") || command.startsWith("unmark")) {
@@ -35,15 +34,39 @@ public class Tigger {
                     list.get(index - 1).setNotDone();
                     System.out.println("    OK, I've marked this task as not done yet: \n");
                 }
-                System.out.println("      [" + list.get(index - 1).getStatusIcon() + "] "
-                        + list.get(index - 1).getDescription());
+                System.out.println("      " + list.get(index - 1).toString());
                 System.out.println("    ____________________________________________________________\n");
-            } else {
-            Task t = new Task(command);
-            list.add(t);
-            System.out.println("    ____________________________________________________________\n");
-            System.out.println("    added:" + command);
-            System.out.println("    ____________________________________________________________\n");
+            } else if (command.startsWith("todo")) {
+                System.out.println("    ____________________________________________________________\n");
+                System.out.println("    Got it. I've added this task:\n");
+                ToDo t = new ToDo(command.substring(5));
+                list.add(t);
+                System.out.println("    " + t + "\n");
+                System.out.println("    Now you have " + list.size() + " tasks in the list\n");
+                System.out.println("    ____________________________________________________________\n");
+            } else if (command.startsWith("deadline")) {
+                System.out.println("    ____________________________________________________________\n");
+                System.out.println("    Got it. I've added this task:\n");
+                String fullCommand = command.substring(9);
+                String[] splitCommand = fullCommand.split("[/]");
+                splitCommand[1] = splitCommand[1].substring(3);
+                Deadline d = new Deadline(splitCommand[0], splitCommand[1]);
+                list.add(d);
+                System.out.println("    " + d + "\n");
+                System.out.println("    Now you have " + list.size() + " tasks in the list\n");
+                System.out.println("    ____________________________________________________________\n");
+            } else if (command.startsWith("event")) {
+                System.out.println("    ____________________________________________________________\n");
+                System.out.println("    Got it. I've added this task:\n");
+                String fullCommand = command.substring(6);
+                String[] splitCommand = fullCommand.split("[/]");
+                splitCommand[1] = splitCommand[1].substring(5);
+                splitCommand[2] = splitCommand[2].substring(3);
+                Event d = new Event(splitCommand[0], splitCommand[1], splitCommand[2]);
+                list.add(d);
+                System.out.println("    " + d + "\n");
+                System.out.println("    Now you have " + list.size() + " tasks in the list\n");
+                System.out.println("    ____________________________________________________________\n");
             }
             command = scanner.nextLine();
         }
