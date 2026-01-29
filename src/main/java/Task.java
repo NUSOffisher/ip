@@ -1,3 +1,6 @@
+/**
+ * Abstract class that represents a general task
+ */
 abstract public class Task {
     protected String description;
     protected boolean isDone;
@@ -25,6 +28,6 @@ abstract public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        return "[" + getStatusIcon() + "] " + getDescription().trim();
     }
 }

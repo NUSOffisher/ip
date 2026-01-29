@@ -1,16 +1,26 @@
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.ArrayList;
 
+/**
+ * Chatbot named Tigger that acts as a checklist.
+ */
 public class Tigger {
+    /**
+     * Main body, contains all the logic for inputs and transforming it into checklist items.
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Tigger");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> list;
+        TaskList taskList = new TaskList("src/main/tigger.txt");
+        list = taskList.getTaskList();
 
+        // Use Scanner to read input
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
 
@@ -35,6 +45,7 @@ public class Tigger {
                         list.get(index - 1).setNotDone();
                         System.out.println("    OK, I've marked this task as not done yet: ");
                     }
+                    taskList.replaceList(list);
                     System.out.println("        " + list.get(index - 1).toString());
                     System.out.println("    ____________________________________________________________");
                 } else if (command.startsWith("todo")) {
@@ -45,7 +56,8 @@ public class Tigger {
                     System.out.println("    Got it. I've added this task:");
                     ToDo t = new ToDo(command.substring(5));
                     list.add(t);
-                    System.out.println("    " + t + "");
+                    taskList.addTask(command.substring(5));
+                    System.out.println("    " + t);
                     System.out.println("    Now you have " + list.size() + " tasks in the list");
                     System.out.println("    ____________________________________________________________\n");
                 } else if (command.startsWith("deadline")) {
@@ -59,6 +71,7 @@ public class Tigger {
                     splitCommand[1] = splitCommand[1].substring(3);
                     Deadline d = new Deadline(splitCommand[0], splitCommand[1]);
                     list.add(d);
+                    taskList.addTask(splitCommand[0], splitCommand[1]);
                     System.out.println("    " + d + "\n");
                     System.out.println("    Now you have " + list.size() + " tasks in the list");
                     System.out.println("    ____________________________________________________________\n");
@@ -72,8 +85,9 @@ public class Tigger {
                     String[] splitCommand = fullCommand.split("[/]");
                     splitCommand[1] = splitCommand[1].substring(5);
                     splitCommand[2] = splitCommand[2].substring(3);
-                    Event d = new Event(splitCommand[0], splitCommand[1], splitCommand[2]);
+                    Event d = new Event(splitCommand[0], splitCommand[1].trim(), splitCommand[2]);
                     list.add(d);
+                    taskList.addTask(splitCommand[0], splitCommand[1].trim(), splitCommand[2].trim());
                     System.out.println("    " + d + "\n");
                     System.out.println("    Now you have " + list.size() + " tasks in the list");
                     System.out.println("    ____________________________________________________________\n");
@@ -87,6 +101,7 @@ public class Tigger {
                     Task t = list.get(index);
                     System.out.println("    " + t + "\n");
                     list.remove(index);
+                    taskList.replaceList(list);
                     System.out.println("    Now you have " + list.size() + " tasks in the list");
                     System.out.println("    ____________________________________________________________\n");
                 } else {
