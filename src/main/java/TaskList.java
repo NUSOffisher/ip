@@ -51,7 +51,7 @@ public class TaskList {
 
     /**
      * Adds a new ToDo to tigger.txt.
-     * @param command
+     * @param command description of ToDo
      */
     public void addTask(String command) {
         try (FileWriter myWriter = new FileWriter(path, true)) {
@@ -63,8 +63,8 @@ public class TaskList {
 
     /**
      * Adds a new Deadline to tigger.txt.
-     * @param command
-     * @param by
+     * @param command Description of Deadline
+     * @param by Do by date/time
      */
     public void addTask(String command, String by) {
         try (FileWriter myWriter = new FileWriter(path, true)) {
@@ -76,9 +76,9 @@ public class TaskList {
 
     /**
      * Adds a new Event to tigger.txt.
-     * @param command
-     * @param from
-     * @param to
+     * @param command Description of Event
+     * @param from Event start date/time
+     * @param to Event end date/time
      */
     public void addTask(String command, String from, String to) {
         try (FileWriter myWriter = new FileWriter(path, true)) {
@@ -90,7 +90,7 @@ public class TaskList {
 
     /**
      * Replaces the current list of tasks in tigger.txt with an updated list.
-     * @param list
+     * @param list list of tasks
      */
     public void replaceList(ArrayList<Task> list) {
         int len = list.size();

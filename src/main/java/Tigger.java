@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Tigger {
     /**
      * Main body, contains all the logic for inputs and transforming it into checklist items.
-     * @param args
+     * @param args arguments
      */
     public static void main(String[] args) {
         System.out.println("____________________________________________________________");
