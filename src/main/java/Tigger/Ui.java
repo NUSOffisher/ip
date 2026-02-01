@@ -1,3 +1,5 @@
+package Tigger;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Ui {
@@ -11,7 +13,7 @@ public class Ui {
 
     public void showWelcomeMessage() {
         System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Tigger");
+        System.out.println("Hello! I'm Tigger.Tigger");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 

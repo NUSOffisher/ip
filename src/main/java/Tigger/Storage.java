@@ -1,3 +1,5 @@
+package Tigger;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,7 +14,7 @@ public class Storage {
     ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * Constructor for Storage class.
+     * Constructor for Tigger.Storage class.
      * @param path path to storage file
      */
     public Storage(String path){
@@ -22,21 +24,21 @@ public class Storage {
         try (Scanner reader = new Scanner(savedTasks)) {
             while (reader.hasNextLine()) {
                 String task = reader.nextLine();
-                if (task.startsWith("T")) { // New ToDo
+                if (task.startsWith("T")) { // New Tigger.ToDo
                     String[] subCommand = task.split("[|]");
                     ToDo todo = new ToDo(subCommand[2].trim());
                     if (subCommand[1].trim().equals("1")) {
                         todo.setDone();
                     }
                     taskList.add(todo);
-                } else if (task.startsWith("D")) { // New Deadline
+                } else if (task.startsWith("D")) { // New Tigger.Deadline
                     String[] subCommand = task.split("[|]");
                     Deadline deadline = new Deadline(subCommand[2].trim(), subCommand[3].trim());
                     if (subCommand[1].trim().equals("1")) {
                         deadline.setDone();
                     }
                     taskList.add(deadline);
-                } else if (task.startsWith("E")) { // New Event
+                } else if (task.startsWith("E")) { // New Tigger.Event
                     String[] subCommand = task.split("[|]");
                     Event event = new Event(subCommand[2].trim(), subCommand[3].trim(), subCommand[4].trim());
                     if (subCommand[1].trim().equals("1")) {

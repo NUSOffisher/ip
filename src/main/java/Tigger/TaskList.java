@@ -1,3 +1,5 @@
+package Tigger;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +9,7 @@ public class TaskList {
     ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * Constructor for TaskList class.
+     * Constructor for Tigger.TaskList class.
      * @param taskList list of tasks
      */
     public TaskList(ArrayList<Task> taskList) {

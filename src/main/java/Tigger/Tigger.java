@@ -1,7 +1,9 @@
+package Tigger;
+
 import java.util.ArrayList;
 
 /**
- * Chatbot named Tigger that acts as a checklist.
+ * Chatbot named Tigger.Tigger that acts as a checklist.
  */
 public class Tigger {
     private Storage storage;
@@ -9,7 +11,7 @@ public class Tigger {
     private Ui ui;
 
     /**
-     * Constructor for Tigger class.
+     * Constructor for Tigger.Tigger class.
      * @param path path to storage file
      */
     public Tigger(String path) {
@@ -19,7 +21,7 @@ public class Tigger {
     }
 
     /**
-     * Runs the Tigger chatbot.
+     * Runs the Tigger.Tigger chatbot.
      */
     public void run() {
         ui.showWelcomeMessage();
@@ -36,7 +38,7 @@ public class Tigger {
     }
 
     /**
-     * Main method to start Tigger chatbot.
+     * Main method to start Tigger.Tigger chatbot.
      * @param args arguments
      */
     public static void main(String[] args) {

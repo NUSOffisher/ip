@@ -1,5 +1,7 @@
+package Tigger;
+
 /**
- * Represents a ToDo task.
+ * Represents a Tigger.ToDo task.
  */
 public class ToDo extends Task{
 

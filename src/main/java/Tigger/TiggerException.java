@@ -1,3 +1,5 @@
+package Tigger;
+
 public class TiggerException extends IllegalArgumentException{
     String message;
 

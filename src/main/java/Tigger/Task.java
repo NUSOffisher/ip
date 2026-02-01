@@ -1,3 +1,5 @@
+package Tigger;
+
 /**
  * Abstract class that represents a general task
  */

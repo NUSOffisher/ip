@@ -1,9 +1,11 @@
+package Tigger;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an Event task.
+ * Represents an Tigger.Event task.
  */
 public class Event extends Task {
 
