@@ -1,7 +1,7 @@
-T | 0 | read book
-D | 1 | return book| June 6th
-E | 0 | project meeting| Aug 6th 2pm | 4pm
-T | 0 | join sports club
-T | 0 | send emails
-D | 0 | hello | 2026-01-05
-E | 0 | test | 2026-01-12 | 2026-01-20
+T | 1 | read book
+D | 0 | return book | June 6th
+T | 1 | hello
+E | 0 | test | 2019-01-01 | 2020-01-01
+D | 0 | lol | 2026-01-33
+D | 1 | erf | today
+E | 1 | efrg | tmr | today
