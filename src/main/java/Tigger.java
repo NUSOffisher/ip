@@ -4,10 +4,6 @@ import java.util.ArrayList;
  * Chatbot named Tigger that acts as a checklist.
  */
 public class Tigger {
-    /**
-     * Main body, contains all the logic for inputs and transforming it into checklist items.
-     * @param args arguments
-     */
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -28,7 +24,7 @@ public class Tigger {
     public void run() {
         ui.showWelcomeMessage();
         ArrayList<Task> list = tasks.getTaskList();
-        boolean isExit = false;
+        boolean isExit;
 
         do {
             isExit = ui.handleCommand(list);
