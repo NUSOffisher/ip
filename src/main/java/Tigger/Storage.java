@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to handle storage of tasks to a file.
+ */
 public class Storage {
 
     String path;
@@ -52,6 +55,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the list of tasks
+     * @return list of tasks
+     */
     public ArrayList<Task> getTaskList () {
             return this.taskList;
     }

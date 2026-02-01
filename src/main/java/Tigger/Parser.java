@@ -2,11 +2,18 @@ package Tigger;
 
 import java.util.ArrayList;
 
+/**
+ * Parser class to handle user commands and manipulate the task list.
+ */
 public class Parser {
 
-    private Parser() {
-    }
-
+    /**
+     * Executes the command
+     *
+     * @param command The user command to execute.
+     * @param list    The list of tasks to manipulate.
+     * @throws TiggerException If the command is invalid or cannot be processed.
+     */
     public static void execute(String command, ArrayList<Task> list) throws TiggerException {
         if (command == null) {
             return;
@@ -75,7 +82,7 @@ public class Parser {
             System.out.println("    ____________________________________________________________\n");
         } else if (command.startsWith("delete")) {
             if (command.length() <= 7) {
-                throw new TiggerException("Whats do you want me to delete??");
+                throw new TiggerException("What do you want me to delete??");
             }
             System.out.println("    ____________________________________________________________");
             System.out.println("    Noted. I've removed this task:");
@@ -84,6 +91,27 @@ public class Parser {
             System.out.println("    " + t + "\n");
             list.remove(index);
             System.out.println("    Now you have " + list.size() + " tasks in the list");
+            System.out.println("    ____________________________________________________________\n");
+        } else if (command.startsWith("find")) {
+            if (command.length() <= 5) {
+                throw new TiggerException("What do you want me to find??");
+            }
+            System.out.println("    ____________________________________________________________");
+            String itemToFind = command.substring(5);
+            ArrayList<Task> foundTasks = new ArrayList<>();
+            for (Task task : list) {
+                if (task.getDescription().contains(itemToFind)) {
+                    foundTasks.add(task);
+                }
+            }
+            if (!foundTasks.isEmpty()) {
+                System.out.println("    Here are the matching tasks in your list:");
+                for (int i = 0; i < foundTasks.size(); i++) {
+                    System.out.println("    " + (i + 1) + "." + foundTasks.get(i).toString());
+                }
+            } else {
+                System.out.println("    No matching tasks found in your list.");
+            }
             System.out.println("    ____________________________________________________________\n");
         } else {
             throw new TiggerException("Give me something I can understand!!");

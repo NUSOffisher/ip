@@ -5,6 +5,10 @@ package Tigger;
  */
 public class ToDo extends Task{
 
+    /**
+     * Constructs a ToDo task.
+     * @param description description of the to-do task
+     */
     public ToDo(String description) {
         super(description);
     }
