@@ -1,0 +1,35 @@
+package Tigger;
+
+/**
+ * Abstract class that represents a general task
+ */
+abstract public class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDone() {
+        isDone = true;
+    }
+
+    public void setNotDone() {
+        isDone = false;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + getDescription().trim();
+    }
+}

@@ -1,0 +1,7 @@
+T | 1 | read book
+D | 0 | return book | June 6th
+T | 1 | hello
+E | 0 | test | 2019-01-01 | 2020-01-01
+D | 0 | lol | 2026-01-33
+D | 1 | erf | today
+E | 1 | efrg | tmr | today
