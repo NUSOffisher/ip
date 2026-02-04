@@ -1,7 +1,7 @@
 package Tigger;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Handles user interaction for Tigger chatbot.
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class Ui {
 
     private String currentCommand;
-    Scanner scanner;
+    private Scanner scanner;
 
     /**
      * Constructs a Ui object.
      */
-    public Ui(){
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 

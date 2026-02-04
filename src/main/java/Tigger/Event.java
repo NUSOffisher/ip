@@ -21,7 +21,7 @@ public class Event extends Task {
      * @param to end date of the event
      */
     public Event(String description, String from, String to) {
-        super(description);
+        super(description.trim());
         this.from = from;
         this.to = to;
         try {

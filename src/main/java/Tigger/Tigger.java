@@ -42,6 +42,6 @@ public class Tigger {
      * @param args arguments
      */
     public static void main(String[] args) {
-       new Tigger("src/main/java/Tigger/tigger.txt").run();
+        new Tigger("src/main/java/Tigger/tigger.txt").run();
     }
 }

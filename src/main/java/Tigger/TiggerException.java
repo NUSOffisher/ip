@@ -3,7 +3,7 @@ package Tigger;
 /**
  * Custom exception class for Tigger chatbot.
  */
-public class TiggerException extends IllegalArgumentException{
+public class TiggerException extends IllegalArgumentException {
     String message;
 
     /**
@@ -16,7 +16,7 @@ public class TiggerException extends IllegalArgumentException{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return message;
     }
 }

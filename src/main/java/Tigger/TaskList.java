@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Public class for loading and saving tasks to tigger.txt.
  */
 public class TaskList {
-    ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Constructor for Tigger.TaskList class.
@@ -17,7 +17,7 @@ public class TaskList {
     }
 
 
-    public ArrayList<Task> getTaskList () {
+    public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 

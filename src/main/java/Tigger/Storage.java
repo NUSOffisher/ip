@@ -12,15 +12,15 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    String path;
-    File savedTasks;
-    ArrayList<Task> taskList = new ArrayList<>();
+    private String path;
+    private File savedTasks;
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Constructor for Tigger.Storage class.
      * @param path path to storage file
      */
-    public Storage(String path){
+    public Storage(String path) {
         this.path = path;
         this.savedTasks = new File(path);
 
@@ -59,8 +59,8 @@ public class Storage {
      * Returns the list of tasks
      * @return list of tasks
      */
-    public ArrayList<Task> getTaskList () {
-            return this.taskList;
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
     }
 
     /**
@@ -81,15 +81,19 @@ public class Storage {
                         }
                     } else if (t instanceof Deadline deadline) {
                         if (deadline.isDone) {
-                            myWriter.write("D | 1 | " + deadline.getDescription().trim() + "| " + deadline.by.trim());
+                            myWriter.write("D | 1 | " + deadline.getDescription().trim()
+                                    + "| " + deadline.by.trim());
                         } else {
-                            myWriter.write("D | 0 | " + deadline.getDescription().trim() + "| " + deadline.by.trim());
+                            myWriter.write("D | 0 | " + deadline.getDescription().trim()
+                                    + "| " + deadline.by.trim());
                         }
                     } else if (t instanceof Event event) {
                         if (event.isDone) {
-                            myWriter.write("E | 1 | " + event.getDescription().trim() + "| " + event.from.trim() + " | " + event.to.trim());
+                            myWriter.write("E | 1 | " + event.getDescription().trim()
+                                    + "| " + event.from.trim() + " | " + event.to.trim());
                         } else {
-                            myWriter.write("E | 0 | " + event.getDescription().trim() + "| " + event.from.trim() + " | " + event.to.trim());
+                            myWriter.write("E | 0 | " + event.getDescription().trim()
+                                    + "| " + event.from.trim() + " | " + event.to.trim());
                         }
                     }
                 } catch (IOException e) {
@@ -106,15 +110,19 @@ public class Storage {
                         }
                     } else if (t instanceof Deadline deadline) {
                         if (deadline.isDone) {
-                            myWriter.write("\nD | 1 | " + deadline.getDescription().trim() + " | " + deadline.by.trim());
+                            myWriter.write("\nD | 1 | " + deadline.getDescription().trim()
+                                    + " | " + deadline.by.trim());
                         } else {
-                            myWriter.write("\nD | 0 | " + deadline.getDescription().trim() + " | " + deadline.by.trim());
+                            myWriter.write("\nD | 0 | " + deadline.getDescription().trim()
+                                    + " | " + deadline.by.trim());
                         }
                     } else if (t instanceof Event event) {
                         if (event.isDone) {
-                            myWriter.write("\nE | 1 | " + event.getDescription().trim() + " | " + event.from.trim() + " | " + event.to.trim());
+                            myWriter.write("\nE | 1 | " + event.getDescription().trim()
+                                    + " | " + event.from.trim() + " | " + event.to.trim());
                         } else {
-                            myWriter.write("\nE | 0 | " + event.getDescription().trim() + " | " + event.from.trim() + " | " + event.to.trim());
+                            myWriter.write("\nE | 0 | " + event.getDescription().trim()
+                                    + " | " + event.from.trim() + " | " + event.to.trim());
                         }
                     }
                 } catch (IOException e) {
