@@ -44,4 +44,8 @@ public class Tigger {
     public static void main(String[] args) {
         new Tigger("src/main/java/Tigger/tigger.txt").run();
     }
+
+    public String getResponse(String input) {
+        return "Tigger heard: " + input;
+    }
 }
