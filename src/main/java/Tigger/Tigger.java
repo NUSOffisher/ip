@@ -42,10 +42,22 @@ public class Tigger {
      * @param args arguments
      */
     public static void main(String[] args) {
-        new Tigger("src/main/java/Tigger/tigger.txt").run();
+        //new Tigger("src/main/java/Tigger/tigger.txt").run();
     }
 
-    public String getResponse(String input) {
-        return "Tigger heard: " + input;
+
+    public String getWelcomeMessage() {
+        return "    ____________________________________________________________\n"
+               + "    Hello! I'm Tigger\n"
+               + "    What can I do for you?\n"
+               + "    ____________________________________________________________";
+    }
+    public TaskList getTaskList() {
+        return tasks;
+    }
+
+    /** Returns the Storage instance used by Tigger */
+    public Storage getStorage() {
+        return storage;
     }
 }
