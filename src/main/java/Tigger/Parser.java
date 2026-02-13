@@ -18,7 +18,6 @@ public class Parser {
         if (command == null) {
             return;
         }
-
         if (command.equals("list")) {
             System.out.println("    ____________________________________________________________");
             System.out.println("    Here are the tasks in your list:");
