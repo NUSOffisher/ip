@@ -139,9 +139,11 @@ public class Parser {
             out.append("    ____________________________________________________________\n");
             if (command.startsWith("mark")) {
                 list.get(index - 1).setDone();
+                assert list.get(index - 1).getStatusIcon().equals("X") : "Task should be marked as done.";
                 out.append("    Nice! I've marked this task as done: \n");
             } else {
                 list.get(index - 1).setNotDone();
+                assert list.get(index - 1).getStatusIcon().equals(" ") : "Task should be marked as undone.";
                 out.append("    OK, I've marked this task as not done yet: \n");
             }
             out.append("        ").append(list.get(index - 1).toString()).append("\n");

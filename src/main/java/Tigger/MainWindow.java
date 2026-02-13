@@ -55,6 +55,7 @@ public class MainWindow extends AnchorPane {
             response = "    ____________________________________________________________\n"
                      + "    " + e + "\n"
                      + "    ____________________________________________________________\n";
+            assert e.toString().equals("Give me something I can understand!!") : "Unexpected TiggerException message";
         }
 
         dialogContainer.getChildren().addAll(

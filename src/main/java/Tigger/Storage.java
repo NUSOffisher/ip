@@ -22,6 +22,7 @@ public class Storage {
      */
     public Storage(String path) {
         this.path = path;
+        assert path.equals("src/main/java/Tigger/tigger.txt") : "The path is incorrect";
         this.savedTasks = new File(path);
 
         try (Scanner reader = new Scanner(savedTasks)) {
