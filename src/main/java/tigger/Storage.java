@@ -68,31 +68,67 @@ public class Storage {
      * @param tasks list of tasks to be saved
      */
     public void saveTasks(ArrayList<Task> tasks) {
-        try (FileWriter myWriter = new FileWriter(path)) {
-            for (int i = 0; i < tasks.size(); i++) {
-                Task t = tasks.get(i);
-
-                if (i > 0) {
-                    myWriter.write("\n");
+        int len = tasks.size();
+        for (int i = 0; i < len; i++) {
+            if (i == 0) {
+                try (FileWriter myWriter = new FileWriter(path)) {
+                    Task t = tasks.get(i);
+                    if (t instanceof ToDo todo) {
+                        if (todo.isDone) {
+                            myWriter.write("T | 1 | " + todo.getDescription().trim());
+                        } else {
+                            myWriter.write("T | 0 | " + todo.getDescription().trim());
+                        }
+                    } else if (t instanceof Deadline deadline) {
+                        if (deadline.isDone) {
+                            myWriter.write("D | 1 | " + deadline.getDescription().trim()
+                                    + "| " + deadline.by.trim());
+                        } else {
+                            myWriter.write("D | 0 | " + deadline.getDescription().trim()
+                                    + "| " + deadline.by.trim());
+                        }
+                    } else if (t instanceof Event event) {
+                        if (event.isDone) {
+                            myWriter.write("E | 1 | " + event.getDescription().trim()
+                                    + "| " + event.from.trim() + " | " + event.to.trim());
+                        } else {
+                            myWriter.write("E | 0 | " + event.getDescription().trim()
+                                    + "| " + event.from.trim() + " | " + event.to.trim());
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("An error occurred");
                 }
-                if (t instanceof ToDo todo) {
-                    myWriter.write("T | " + (todo.isDone ? "1" : "0")
-                            + " | " + todo.getDescription().trim());
-
-                } else if (t instanceof Deadline deadline) {
-                    myWriter.write("D | " + (deadline.isDone ? "1" : "0")
-                            + " | " + deadline.getDescription().trim()
-                            + " | " + deadline.by.trim());
-
-                } else if (t instanceof Event event) {
-                    myWriter.write("E | " + (event.isDone ? "1" : "0")
-                            + " | " + event.getDescription().trim()
-                            + " | " + event.from.trim()
-                            + " | " + event.to.trim());
+            } else {
+                try (FileWriter myWriter = new FileWriter(path, true)) {
+                    Task t = tasks.get(i);
+                    if (t instanceof ToDo todo) {
+                        if (todo.isDone) {
+                            myWriter.write("\nT | 1 | " + todo.getDescription().trim());
+                        } else {
+                            myWriter.write("\nT | 0 | " + todo.getDescription().trim());
+                        }
+                    } else if (t instanceof Deadline deadline) {
+                        if (deadline.isDone) {
+                            myWriter.write("\nD | 1 | " + deadline.getDescription().trim()
+                                    + " | " + deadline.by.trim());
+                        } else {
+                            myWriter.write("\nD | 0 | " + deadline.getDescription().trim()
+                                    + " | " + deadline.by.trim());
+                        }
+                    } else if (t instanceof Event event) {
+                        if (event.isDone) {
+                            myWriter.write("\nE | 1 | " + event.getDescription().trim()
+                                    + " | " + event.from.trim() + " | " + event.to.trim());
+                        } else {
+                            myWriter.write("\nE | 0 | " + event.getDescription().trim()
+                                    + " | " + event.from.trim() + " | " + event.to.trim());
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("An error occurred");
                 }
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred");
         }
     }
 }
