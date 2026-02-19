@@ -1,4 +1,4 @@
-package Tigger;
+package tigger;
 
 /**
  * Custom exception class for Tigger chatbot.

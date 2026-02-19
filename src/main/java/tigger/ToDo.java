@@ -1,4 +1,4 @@
-package Tigger;
+package tigger;
 
 /**
  * Represents a Tigger.ToDo task.

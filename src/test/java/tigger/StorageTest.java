@@ -1,13 +1,16 @@
-package Tigger;
+package tigger;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class StorageTest {
 
@@ -31,27 +34,41 @@ public class StorageTest {
         writer.saveTasks(tasks);
 
         List<String> lines = Files.readAllLines(temp);
-        assertEquals("T | 1 | test", lines.get(0));
-        assertEquals("D | 1 | deadline | 2025-01-01", lines.get(1));
-        assertEquals("E | 0 | event | 2025-02-01 | 2025-02-02", lines.get(2));
+        allTest(lines);
 
         Storage loader = new Storage(path);
         ArrayList<Task> loaded = loader.getTaskList();
         assertEquals(3, loaded.size());
 
+        todoTest(loaded);
+        deadlineTest(loaded);
+        eventTest(loaded);
+    }
+
+    public void allTest(List<String> lines) {
+        assertEquals("T | 1 | test", lines.get(0));
+        assertEquals("D | 1 | deadline | 2025-01-01", lines.get(1));
+        assertEquals("E | 0 | event | 2025-02-01 | 2025-02-02", lines.get(2));
+    }
+
+    public void todoTest(ArrayList<Task> loaded) {
         Task t0 = loaded.get(0);
         assertInstanceOf(ToDo.class, t0);
         ToDo lt = (ToDo) t0;
         assertEquals("test", lt.getDescription());
         assertTrue(lt.isDone);
+    }
 
+    public void deadlineTest(ArrayList<Task> loaded) {
         Task t1 = loaded.get(1);
         assertInstanceOf(Deadline.class, t1);
         Deadline ld = (Deadline) t1;
         assertEquals("deadline", ld.getDescription());
         assertTrue(ld.isDone);
         assertEquals("2025-01-01", ld.by);
+    }
 
+    public void eventTest(ArrayList<Task> loaded) {
         Task t2 = loaded.get(2);
         assertInstanceOf(Event.class, t2);
         Event le = (Event) t2;

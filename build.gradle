@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClass.set("Tigger.Launcher")
+    mainClass.set("tigger.Launcher")
 }
 
 shadowJar {
