@@ -1,10 +1,10 @@
-package Tigger;
+package tigger;
 
 /**
  * Custom exception class for Tigger chatbot.
  */
 public class TiggerException extends IllegalArgumentException {
-    String message;
+    private String message;
 
     /**
      * Constructor for TiggerException.

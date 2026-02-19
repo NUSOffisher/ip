@@ -1,6 +1,5 @@
-package Tigger;
+package tigger;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -37,25 +36,4 @@ public class Ui {
 
     }
 
-    /**
-     * Handles the user command.
-     * @param list list of tasks
-     * @return true if the command is "bye", false otherwise
-     */
-    public boolean handleCommand(ArrayList<Task> list) {
-        readCommand();
-        if (currentCommand.equals("bye")) {
-            return true;
-        }
-
-        try {
-            Parser.execute(currentCommand, list);
-        } catch (TiggerException e) {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("    " + e);
-            System.out.println("    ____________________________________________________________\n");
-        }
-
-        return false;
-    }
 }

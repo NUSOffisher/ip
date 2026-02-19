@@ -1,8 +1,9 @@
 T | 0 | read book
 D | 0 | return book | June 6th
 T | 0 | hello
-E | 0 | test | 2019-01-01 | 2020-01-01
+E | 1 | test | 2019-01-01 | 2020-01-01
 D | 0 | lol | 2026-01-33
 D | 1 | erf | today
 E | 0 | efrg | tmr | today
 T | 1 | attend tut
+T | 0 | do ps2

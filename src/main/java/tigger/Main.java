@@ -1,4 +1,4 @@
-package Tigger;
+package tigger;
 
 import java.io.IOException;
 
