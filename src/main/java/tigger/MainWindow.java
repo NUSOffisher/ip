@@ -52,7 +52,6 @@ public class MainWindow extends AnchorPane {
     /** Injects the Tigger instance */
     public void setTigger(Tigger t) {
         tigger = t;
-        // attempt to load images; if paths are incorrect the images will be null and nothing will show
         userImage = loadImage("/images/ferb.jpg");
         tiggerImage = loadImage("/images/tigger.jpeg");
 

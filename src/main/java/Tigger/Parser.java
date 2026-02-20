@@ -156,9 +156,9 @@ public class Parser {
         String[] splitCommand = fullCommand.split("[/]");
         splitCommand[1] = splitCommand[1].substring(5);
         splitCommand[2] = splitCommand[2].substring(3);
-        Event d = new Event(splitCommand[0], splitCommand[1].trim(), splitCommand[2]);
-        list.add(d);
-        out.append("    ").append(d).append("\n\n");
+        Event e = new Event(splitCommand[0], splitCommand[1].trim(), splitCommand[2]);
+        list.add(e);
+        out.append("    ").append(e).append("\n\n");
         out.append("    Now you have ").append(list.size()).append(" bouncy tasks in the list! whoopee!\n");
         out.append("    _____________________________________\n");
     }
