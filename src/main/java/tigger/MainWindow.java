@@ -1,5 +1,6 @@
 package tigger;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import javafx.animation.TranslateTransition;
@@ -28,17 +29,33 @@ public class MainWindow extends AnchorPane {
 
     private Tigger tigger;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ferb.jpg"));
-    private Image tiggerImage = new Image(this.getClass().getResourceAsStream("/images/tigger.jpeg"));
+    // Load images lazily and defensively so missing resources don't crash the app
+    private Image userImage;
+    private Image tiggerImage;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    private Image loadImage(String path) {
+        try (InputStream is = this.getClass().getResourceAsStream(path)) {
+            if (is != null) {
+                return new Image(is);
+            }
+        } catch (Exception e) {
+            // ignore and return null so no image is displayed
+        }
+        return null;
+    }
+
     /** Injects the Tigger instance */
     public void setTigger(Tigger t) {
         tigger = t;
+        // attempt to load images; if paths are incorrect the images will be null and nothing will show
+        userImage = loadImage("/images/ferb.jpg");
+        tiggerImage = loadImage("/images/tigger.jpeg");
+
         String welcomeMessage = tigger.getWelcomeMessage();
         dialogContainer.getChildren().add(DialogBox.getTiggerDialog(welcomeMessage, tiggerImage));
     }
@@ -69,9 +86,11 @@ public class MainWindow extends AnchorPane {
         storage.saveTasks(list);
 
         if (input.trim().equals("bye")) {
-            String goodbye = "    _____________________________________\n"
-                           + "    Bye. Hope to see you again soon!\n"
-                           + "    _____________________________________";
+            String goodbye = """
+                        _____________________________________
+                        Bye. Hope to see you again soon!
+                        _____________________________________\
+                    """;
             dialogContainer.getChildren().add(DialogBox.getTiggerDialog(goodbye, tiggerImage));
             Platform.exit();
         }

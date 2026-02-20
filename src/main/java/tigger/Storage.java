@@ -16,6 +16,10 @@ public class Storage {
     private File savedTasks;
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    // Track whether loading failed and an optional message to show the user
+    private boolean failedToLoad = false;
+    private String loadErrorMessage = null;
+
     /**
      * Constructor for Tigger.Storage class.
      * @param path path to storage file
@@ -51,7 +55,9 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Saved file not found");
+            // Record the failure so callers can surface a friendly message to the user
+            this.failedToLoad = true;
+            this.loadErrorMessage = "Failed to load from file, make sure your file exists!";
         }
     }
 
@@ -61,6 +67,20 @@ public class Storage {
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Returns true if loading the saved file failed
+     */
+    public boolean hasLoadError() {
+        return this.failedToLoad;
+    }
+
+    /**
+     * Returns the load error message if present
+     */
+    public String getLoadErrorMessage() {
+        return this.loadErrorMessage;
     }
 
     /**
