@@ -1,4 +1,5 @@
 T | 1 | read book
 D | 0 | return book | June 6th
-T | 0 | hello
+T | 0 | go to the gym
 T | 1 | finish this
+E | 0 | attend lecture | 2026-02-01 | 2026-02-21

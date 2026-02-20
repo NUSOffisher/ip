@@ -1,10 +1,12 @@
 package tigger;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,6 +24,18 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+
+            // Try to load the title bar icon from resources; if missing, silently skip
+            try (InputStream is = Main.class.getResourceAsStream("/images/tigger.jpeg")) {
+                if (is != null) {
+                    Image icon = new Image(is);
+                    stage.getIcons().add(icon);
+                }
+            } catch (Exception e) {
+                // ignore - icon is optional
+            }
+
+            stage.setTitle("Tigger chatbot");
             fxmlLoader.<MainWindow>getController().setTigger(tigger); // inject the Tigger instance
             stage.show();
         } catch (IOException e) {
