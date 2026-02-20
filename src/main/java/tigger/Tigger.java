@@ -17,10 +17,12 @@ public class Tigger {
     }
 
     public String getWelcomeMessage() {
-        return "    ____________________________________________________________\n"
-               + "    Hello! I'm Tigger\n"
-               + "    What can I do for you?\n"
-               + "    ____________________________________________________________";
+        return """
+                    _____________________________________
+                    Hello! I'm Tigger
+                    What can I do for you?
+                    _____________________________________\
+                """;
     }
     public TaskList getTaskList() {
         return tasks;

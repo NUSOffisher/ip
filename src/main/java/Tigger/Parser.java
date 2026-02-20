@@ -5,6 +5,7 @@ import java.util.Random;
 
 /**
  * Parser class to handle user commands and manipulate the task list.
+ * Used Github Copilot to change the responses to be more Tigger-like.
  */
 public class Parser {
     private static boolean waitingForTriviaAnswer = false;
@@ -25,9 +26,9 @@ public class Parser {
         if (waitingForTriviaAnswer) {
             waitingForTriviaAnswer = false;
             if (command.equalsIgnoreCase(currentTriviaAnswer)) {
-                return "    Correct!";
+                return "    Tigerrific! That's right! Tigger's proud of you!";
             } else {
-                return "    Wrong! The answer was: " + currentTriviaAnswer;
+                return "    Oh, fiddle-umps! That's not it! The answer was: " + currentTriviaAnswer;
             }
         }
 
@@ -50,7 +51,7 @@ public class Parser {
         } else if (command.startsWith("trivia")) {
             triviaCommand(out);
         } else {
-            throw new TiggerException("Give me something I can understand!!");
+            throw new TiggerException("Tigger can't understand that! Try something else, tee-hee!");
         }
 
         return out.toString();
@@ -62,13 +63,13 @@ public class Parser {
      * @param out  The StringBuilder to append the output message to.
      */
     public static void listCommand(ArrayList<Task> list, StringBuilder out) {
-        out.append("    ____________________________________________________________\n");
-        out.append("    Here are the tasks in your list:\n");
+        out.append("    _____________________________________\n");
+        out.append("    Tigger's bouncy list o' tasks:\n");
         for (int i = 0; i < list.size(); i++) {
             Task current = list.get(i);
             out.append("    ").append(i + 1).append(". ").append(current.toString()).append("\n");
         }
-        out.append("    ____________________________________________________________\n");
+        out.append("    _____________________________________\n");
     }
     /**
      * Helper method to handle mark and unmark commands.
@@ -81,16 +82,16 @@ public class Parser {
     public static void markCommand(String command, ArrayList<Task> list, StringBuilder out) throws TiggerException {
         String[] splitString = command.split("\\s");
         int index = Integer.parseInt(splitString[1]);
-        out.append("    ____________________________________________________________\n");
+        out.append("    _____________________________________\n");
         if (command.startsWith("mark")) {
             list.get(index - 1).setDone();
-            out.append("    Nice! I've marked this task as done: \n");
+            out.append("    Tigerrific! I bounced this one as done! Hip hooray!\n");
         } else {
             list.get(index - 1).setNotDone();
-            out.append("    OK, I've marked this task as not done yet: \n");
+            out.append("    Oh, tiddly! It's unbounced now (not done):\n");
         }
         out.append("        ").append(list.get(index - 1).toString()).append("\n");
-        out.append("    ____________________________________________________________\n");
+        out.append("    _____________________________________\n");
     }
     /**
      * Helper method to handle the todo command.
@@ -102,15 +103,15 @@ public class Parser {
      */
     public static void toDoCommand(String command, ArrayList<Task> list, StringBuilder out) throws TiggerException {
         if (command.length() <= 5) {
-            throw new TiggerException("What do you want me todo??");
+            throw new TiggerException("What d'ya want Tigger to do??");
         }
-        out.append("    ____________________________________________________________\n");
-        out.append("    Got it. I've added this task:\n");
+        out.append("    _____________________________________\n");
+        out.append("    Tigerrific! Tigger's added a bouncy task:\n");
         ToDo t = new ToDo(command.substring(5));
         list.add(t);
         out.append("    ").append(t).append("\n");
-        out.append("    Now you have ").append(list.size()).append(" tasks in the list\n");
-        out.append("    ____________________________________________________________\n");
+        out.append("    Now you have ").append(list.size()).append(" bouncy tasks in the list! Bounce on!\n");
+        out.append("    _____________________________________\n");
     }
     /**
      * Helper method to handle the deadline command.
@@ -124,18 +125,18 @@ public class Parser {
                                        ArrayList<Task> list,
                                        StringBuilder out) throws TiggerException {
         if (command.length() <= 9) {
-            throw new TiggerException("What's the deadline for??");
+            throw new TiggerException("What's the deadline for, Tigger can't guess??");
         }
-        out.append("    ____________________________________________________________\n");
-        out.append("    Got it. I've added this task:\n");
+        out.append("    _____________________________________\n");
+        out.append("    Tigerrific! Tigger's added a deadline task! Tick-tock:\n");
         String fullCommand = command.substring(9);
         String[] splitCommand = fullCommand.split("[/]");
         splitCommand[1] = splitCommand[1].substring(3);
         Deadline d = new Deadline(splitCommand[0], splitCommand[1]);
         list.add(d);
         out.append("    ").append(d).append("\n\n");
-        out.append("    Now you have ").append(list.size()).append(" tasks in the list\n");
-        out.append("    ____________________________________________________________\n");
+        out.append("    Now you have ").append(list.size()).append(" bouncy tasks in the list! Bounce along!\n");
+        out.append("    _____________________________________\n");
     }
     /**
      * Helper method to handle the event command.
@@ -147,10 +148,10 @@ public class Parser {
      */
     public static void eventCommand(String command, ArrayList<Task> list, StringBuilder out) throws TiggerException {
         if (command.length() <= 6) {
-            throw new TiggerException("Whats the new event??");
+            throw new TiggerException("What's the new event, dear Tigger??");
         }
-        out.append("    ____________________________________________________________\n");
-        out.append("    Got it. I've added this task:\n");
+        out.append("    _____________________________________\n");
+        out.append("    Tigerrific! Tigger's added an event! How exciting!:\n");
         String fullCommand = command.substring(6);
         String[] splitCommand = fullCommand.split("[/]");
         splitCommand[1] = splitCommand[1].substring(5);
@@ -158,8 +159,8 @@ public class Parser {
         Event d = new Event(splitCommand[0], splitCommand[1].trim(), splitCommand[2]);
         list.add(d);
         out.append("    ").append(d).append("\n\n");
-        out.append("    Now you have ").append(list.size()).append(" tasks in the list\n");
-        out.append("    ____________________________________________________________\n");
+        out.append("    Now you have ").append(list.size()).append(" bouncy tasks in the list! whoopee!\n");
+        out.append("    _____________________________________\n");
     }
     /**
      * Helper method to handle the delete command.
@@ -171,16 +172,16 @@ public class Parser {
      */
     public static void deleteCommand(String command, ArrayList<Task> list, StringBuilder out) throws TiggerException {
         if (command.length() <= 7) {
-            throw new TiggerException("What do you want me to delete??");
+            throw new TiggerException("What d'ya want me to delete??");
         }
-        out.append("    ____________________________________________________________\n");
-        out.append("    Noted. I've removed this task:\n");
+        out.append("    _____________________________________\n");
+        out.append("    Oh my! Tigger removed this bouncy task:\n");
         int index = Integer.parseInt(command.substring(7)) - 1;
         Task t = list.get(index);
         out.append("    ").append(t).append("\n");
         list.remove(index);
-        out.append("    Now you have ").append(list.size()).append(" tasks in the list\n");
-        out.append("    ____________________________________________________________\n");
+        out.append("    Now you have ").append(list.size()).append(" bouncy tasks in the list! All set!\n");
+        out.append("    _____________________________________\n");
     }
     /**
      * Helper method to handle the find command.
@@ -192,9 +193,9 @@ public class Parser {
      */
     public static void findCommand(String command, ArrayList<Task> list, StringBuilder out) throws TiggerException {
         if (command.length() <= 5) {
-            throw new TiggerException("What do you want me to find??");
+            throw new TiggerException("What d'ya want me to find??");
         }
-        out.append("    ____________________________________________________________\n");
+        out.append("    _____________________________________\n");
         String itemToFind = command.substring(5);
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : list) {
@@ -203,14 +204,14 @@ public class Parser {
             }
         }
         if (!foundTasks.isEmpty()) {
-            out.append("    Here are the matching tasks in your list:\n");
+            out.append("    Here are the matching bouncy things! Ta-da!:\n");
             for (int i = 0; i < foundTasks.size(); i++) {
                 out.append("    ").append(i + 1).append(".").append(foundTasks.get(i).toString()).append("\n");
             }
         } else {
-            out.append("    No matching tasks found in your list.\n");
+            out.append("    No matches, oh bother! Tigger couldn't find any.\n");
         }
-        out.append("    ____________________________________________________________\n");
+        out.append("    _____________________________________\n");
     }
     /**
      * Helper method to handle the trivia command.
@@ -226,9 +227,9 @@ public class Parser {
 
         currentTriviaAnswer = trivia.getAnswer(num);
         waitingForTriviaAnswer = true;
-        out.append("    ____________________________________________________________\n");
-        out.append("    Alright, let's play some trivia!\n");
+        out.append("    _____________________________________\n");
+        out.append("    Ooh! Trivia time! Bounce and guess, tee-hee!:\n");
         out.append("    ").append(question).append("\n");
-        out.append("    ____________________________________________________________\n");
+        out.append("    _____________________________________\n");
     }
 }
