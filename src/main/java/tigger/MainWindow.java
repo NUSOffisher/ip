@@ -71,9 +71,7 @@ public class MainWindow extends AnchorPane {
         try {
             response = Parser.getResponse(input, list);
         } catch (TiggerException e) {
-            response = "    _____________________________________\n"
-                     + "    " + e + "\n"
-                     + "    _____________________________________\n";
+            response = e + "\n";
             assert e.toString().equals("Give me something I can understand!!") : "Unexpected TiggerException message";
         }
 
@@ -86,9 +84,7 @@ public class MainWindow extends AnchorPane {
 
         if (input.trim().equals("bye")) {
             String goodbye = """
-                        _____________________________________
-                        Bye. Hope to see you again soon!
-                        _____________________________________\
+                    Bye. Hope to see you again soon!
                     """;
             dialogContainer.getChildren().add(DialogBox.getTiggerDialog(goodbye, tiggerImage));
             Platform.exit();

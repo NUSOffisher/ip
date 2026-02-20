@@ -22,10 +22,8 @@ public class Tigger {
             return msg + "\n";
         }
         return """
-                    _____________________________________
-                    Hello! I'm Tigger
-                    What can I do for you?
-                    _____________________________________\
+                Hello! I'm Tigger
+                What can I do for you?
                 """;
     }
     public TaskList getTaskList() {

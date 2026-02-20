@@ -2,9 +2,9 @@
  * Defines styles for the main layout, text fields, buttons, and chat bubbles.
  * Used ChatGPT to generate this CSS file based on the design requirements.
  */
-
 .root {
-    -fx-background-color: #FFF3E0;
+    -fx-background-color: linear-gradient(to bottom, #FFECB3, #FFE0B2);
+    -fx-font-family: "Comic Sans MS";
 }
 
 .text-field {
@@ -31,24 +31,26 @@
     -fx-background-color: transparent;
 }
 
-
-.root {
-    -fx-font-family: "Comic Sans MS";
-}
-
 .user-bubble {
-    -fx-background-color: #FFE0B2;
+    -fx-background-color: white;
     -fx-background-radius: 20;
     -fx-padding: 10;
 }
 
 .tigger-bubble {
-    -fx-background-color: #FFCC80;
+    -fx-background-color: #F57C00;
     -fx-background-radius: 20;
     -fx-padding: 10;
 }
 
-.root {
-    -fx-background-color:
-            linear-gradient(to bottom, #FFF3E0, #FFE0B2);
+.user-bubble .label {
+    -fx-text-fill: black;
+}
+
+.tigger-bubble .label {
+    -fx-text-fill: white;
+}
+
+.main-background {
+    -fx-background-color: linear-gradient(to bottom, #FFECB3, #FFE0B2);
 }

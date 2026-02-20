@@ -43,9 +43,9 @@
                 <VBox fx:id="dialogContainer"
                       prefHeight="552.0"
                       prefWidth="388.0"
-                      spacing="10" />
+                      spacing="10"
+                      styleClass="main-background" />
             </content>
         </ScrollPane>
     </children>
 </AnchorPane>
-
