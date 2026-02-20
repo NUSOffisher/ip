@@ -36,6 +36,10 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        if (img == null) {
+            displayPicture.setVisible(false);
+            displayPicture.setManaged(false);
+        }
     }
 
     /**
@@ -58,5 +62,3 @@ public class DialogBox extends HBox {
         return db;
     }
 }
-
-

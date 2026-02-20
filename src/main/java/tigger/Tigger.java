@@ -17,6 +17,10 @@ public class Tigger {
     }
 
     public String getWelcomeMessage() {
+        if (storage != null && storage.hasLoadError()) {
+            String msg = storage.getLoadErrorMessage();
+            return msg + "\n";
+        }
         return """
                     _____________________________________
                     Hello! I'm Tigger
