@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +12,8 @@
             prefHeight="600.0" prefWidth="400.0"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tigger.MainWindow">
+            fx:controller="tigger.MainWindow"
+            stylesheets="@tigger.css">
     <children>
         <TextField fx:id="userInput"
                    layoutY="558.0"
@@ -26,7 +28,11 @@
                 onAction="#handleUserInput"
                 prefHeight="41.0"
                 prefWidth="76.0"
-                text="Send" />
+                text="Bounce!" />
+        <Label text="Tigger 🐯"
+               layoutX="120"
+               layoutY="10"
+               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #F57C00;" />
         <ScrollPane fx:id="scrollPane"
                     hbarPolicy="NEVER"
                     hvalue="1.0"
@@ -36,7 +42,8 @@
             <content>
                 <VBox fx:id="dialogContainer"
                       prefHeight="552.0"
-                      prefWidth="388.0" />
+                      prefWidth="388.0"
+                      spacing="10" />
             </content>
         </ScrollPane>
     </children>

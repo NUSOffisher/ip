@@ -2,6 +2,7 @@ package tigger;
 
 import java.util.ArrayList;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 /**
  * Controller for the main GUI.
  */
@@ -52,9 +55,9 @@ public class MainWindow extends AnchorPane {
         try {
             response = Parser.getResponse(input, list);
         } catch (TiggerException e) {
-            response = "    ____________________________________________________________\n"
+            response = "    _____________________________________\n"
                      + "    " + e + "\n"
-                     + "    ____________________________________________________________\n";
+                     + "    _____________________________________\n";
             assert e.toString().equals("Give me something I can understand!!") : "Unexpected TiggerException message";
         }
 
@@ -66,13 +69,19 @@ public class MainWindow extends AnchorPane {
         storage.saveTasks(list);
 
         if (input.trim().equals("bye")) {
-            String goodbye = "    ____________________________________________________________\n"
+            String goodbye = "    _____________________________________\n"
                            + "    Bye. Hope to see you again soon!\n"
-                           + "    ____________________________________________________________";
+                           + "    _____________________________________";
             dialogContainer.getChildren().add(DialogBox.getTiggerDialog(goodbye, tiggerImage));
             Platform.exit();
         }
 
+        // Used ChatGPT to generate the bounce animation code
+        TranslateTransition bounce = new TranslateTransition(Duration.millis(150), sendButton);
+        bounce.setByY(-5);
+        bounce.setAutoReverse(true);
+        bounce.setCycleCount(2);
+        bounce.play();
         userInput.clear();
     }
 }
