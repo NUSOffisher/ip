@@ -15,12 +15,12 @@ public class Storage {
     private File savedTasks;
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    // Track whether loading failed and an optional message to show the user
     private boolean failedToLoad = false;
     private String loadErrorMessage = null;
 
     /**
      * Constructor for Tigger.Storage class.
+     * Used ChatGPT to help with file handling and error handling.
      * @param path path to storage file
      */
     public Storage(String path) {

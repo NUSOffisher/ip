@@ -35,7 +35,7 @@ public class Main extends Application {
             }
 
             stage.setTitle("Tigger chatbot");
-            fxmlLoader.<MainWindow>getController().setTigger(tigger); // inject the Tigger instance
+            fxmlLoader.<MainWindow>getController().setTigger(tigger);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

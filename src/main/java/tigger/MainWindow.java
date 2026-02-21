@@ -29,7 +29,6 @@ public class MainWindow extends AnchorPane {
 
     private Tigger tigger;
 
-    // Load images lazily and defensively so missing resources don't crash the app
     private Image userImage;
     private Image tiggerImage;
 
@@ -44,7 +43,7 @@ public class MainWindow extends AnchorPane {
                 return new Image(is);
             }
         } catch (Exception e) {
-            // ignore and return null so no image is displayed
+            // ignore
         }
         return null;
     }
