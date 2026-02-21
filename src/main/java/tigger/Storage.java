@@ -1,7 +1,6 @@
 package tigger;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,36 +27,60 @@ public class Storage {
         this.path = path;
         this.savedTasks = new File(path);
 
-        try (Scanner reader = new Scanner(savedTasks)) {
-            while (reader.hasNextLine()) {
-                String task = reader.nextLine();
-                if (task.startsWith("T")) { // New Tigger.ToDo
-                    String[] subCommand = task.split("[|]");
-                    ToDo todo = new ToDo(subCommand[2].trim());
-                    if (subCommand[1].trim().equals("1")) {
-                        todo.setDone();
+        try {
+            // Create parent directory if it doesn't exist
+            File parent = savedTasks.getParentFile();
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
+
+            // Create file if it doesn't exist
+            if (!savedTasks.exists()) {
+                savedTasks.createNewFile();
+            }
+
+            // Now load tasks
+            try (Scanner reader = new Scanner(savedTasks)) {
+                while (reader.hasNextLine()) {
+                    String task = reader.nextLine();
+
+                    if (task.startsWith("T")) {
+                        String[] subCommand = task.split("[|]");
+                        ToDo todo = new ToDo(subCommand[2].trim());
+                        if (subCommand[1].trim().equals("1")) {
+                            todo.setDone();
+                        }
+                        taskList.add(todo);
+
+                    } else if (task.startsWith("D")) {
+                        String[] subCommand = task.split("[|]");
+                        Deadline deadline = new Deadline(
+                                subCommand[2].trim(),
+                                subCommand[3].trim()
+                        );
+                        if (subCommand[1].trim().equals("1")) {
+                            deadline.setDone();
+                        }
+                        taskList.add(deadline);
+
+                    } else if (task.startsWith("E")) {
+                        String[] subCommand = task.split("[|]");
+                        Event event = new Event(
+                                subCommand[2].trim(),
+                                subCommand[3].trim(),
+                                subCommand[4].trim()
+                        );
+                        if (subCommand[1].trim().equals("1")) {
+                            event.setDone();
+                        }
+                        taskList.add(event);
                     }
-                    taskList.add(todo);
-                } else if (task.startsWith("D")) { // New Tigger.Deadline
-                    String[] subCommand = task.split("[|]");
-                    Deadline deadline = new Deadline(subCommand[2].trim(), subCommand[3].trim());
-                    if (subCommand[1].trim().equals("1")) {
-                        deadline.setDone();
-                    }
-                    taskList.add(deadline);
-                } else if (task.startsWith("E")) { // New Tigger.Event
-                    String[] subCommand = task.split("[|]");
-                    Event event = new Event(subCommand[2].trim(), subCommand[3].trim(), subCommand[4].trim());
-                    if (subCommand[1].trim().equals("1")) {
-                        event.setDone();
-                    }
-                    taskList.add(event);
                 }
             }
-        } catch (FileNotFoundException e) {
-            // Record the failure so callers can surface a friendly message to the user
+
+        } catch (IOException e) {
             this.failedToLoad = true;
-            this.loadErrorMessage = "Failed to load from file, make sure your file exists!";
+            this.loadErrorMessage = "Error initializing storage file.";
         }
     }
 

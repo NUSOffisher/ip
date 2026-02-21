@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Tigger tigger = new Tigger("src/main/java/Tigger/tigger.txt");
+    private Tigger tigger = new Tigger("data/tigger.txt");
 
     @Override
     public void start(Stage stage) {
@@ -25,14 +25,13 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
 
-            // Try to load the title bar icon from resources; if missing, silently skip
             try (InputStream is = Main.class.getResourceAsStream("/images/tigger.jpeg")) {
                 if (is != null) {
                     Image icon = new Image(is);
                     stage.getIcons().add(icon);
                 }
             } catch (Exception e) {
-                // ignore - icon is optional
+                // ignore
             }
 
             stage.setTitle("Tigger chatbot");
