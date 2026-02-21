@@ -121,11 +121,26 @@ public class Parser {
         if (command.length() <= 9) {
             throw new TiggerException("What's the deadline for, Tigger can't guess??");
         }
-        out.append("Tigerrific! Tigger's added a deadline task! Tick-tock:\n");
         String fullCommand = command.substring(9);
         String[] splitCommand = fullCommand.split("[/]");
-        splitCommand[1] = splitCommand[1].substring(3);
-        Deadline d = new Deadline(splitCommand[0], splitCommand[1]);
+        // validate presence of '/by' and the due string
+        if (splitCommand.length < 2) {
+            throw new TiggerException("Uh oh! I didn't understand that! Please follow this format:\n"
+                    + "deadline <description> /by <due>");
+        }
+        String byPart = splitCommand[1].trim();
+        if (!byPart.toLowerCase().startsWith("by")) {
+            throw new TiggerException("Uh oh! I didn't understand that! Please follow this format:\n"
+                    + "deadline <description> /by <due>");
+        }
+        String byValue = byPart.length() > 2 ? byPart.substring(2).trim() : "";
+        if (byValue.isEmpty()) {
+            throw new TiggerException("Uh oh! I didn't understand that! Please follow this format:\n"
+                    + "deadline <description> /by <due>");
+        }
+
+        out.append("Tigerrific! Tigger's added a deadline task! Tick-tock:\n");
+        Deadline d = new Deadline(splitCommand[0].trim(), byValue);
         list.add(d);
         out.append(d).append("\n\n");
         out.append("Now you have ").append(list.size()).append(" bouncy tasks in the list! Bounce along!\n");
@@ -142,12 +157,28 @@ public class Parser {
         if (command.length() <= 6) {
             throw new TiggerException("What's the new event, dear Tigger??");
         }
-        out.append("Tigerrific! Tigger's added an event! How exciting!:\n");
         String fullCommand = command.substring(6);
         String[] splitCommand = fullCommand.split("[/]");
-        splitCommand[1] = splitCommand[1].substring(5);
-        splitCommand[2] = splitCommand[2].substring(3);
-        Event e = new Event(splitCommand[0], splitCommand[1].trim(), splitCommand[2]);
+        // validate presence of '/from' and '/to' parts
+        if (splitCommand.length < 3) {
+            throw new TiggerException("Uh oh! I didn't understand that! Please follow this format:\n"
+                    + "event <description> /from <start> /to <end>");
+        }
+        String fromPart = splitCommand[1].trim();
+        String toPart = splitCommand[2].trim();
+        if (!fromPart.toLowerCase().startsWith("from") || !toPart.toLowerCase().startsWith("to")) {
+            throw new TiggerException("Uh oh! I didn't understand that! Please follow this format:\n"
+                    + "event <description> /from <start> /to <end>");
+        }
+        String fromValue = fromPart.length() > 4 ? fromPart.substring(4).trim() : "";
+        String toValue = toPart.length() > 2 ? toPart.substring(2).trim() : "";
+        if (fromValue.isEmpty() || toValue.isEmpty()) {
+            throw new TiggerException("Uh oh! I didn't understand that! Please follow this format:\n"
+                    + "event <description> /from <start> /to <end>");
+        }
+
+        out.append("Tigerrific! Tigger's added an event! How exciting!:\n");
+        Event e = new Event(splitCommand[0].trim(), fromValue, toValue);
         list.add(e);
         out.append(e).append("\n\n");
         out.append("Now you have ").append(list.size()).append(" bouncy tasks in the list! whoopee!\n");

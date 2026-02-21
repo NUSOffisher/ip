@@ -32,9 +32,22 @@ public class MainWindow extends AnchorPane {
     private Image userImage;
     private Image tiggerImage;
 
+    /**
+     * Initializes the main window.
+     * Sets up bindings to ensure the UI behaves correctly when resized and when new messages are added.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        scrollPane.setFitToWidth(true);
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+
+        scrollPane.viewportBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
+            dialogContainer.setPrefWidth(newBounds.getWidth());
+        });
+
+        userInput.prefWidthProperty().bind(this.widthProperty().subtract(96));
     }
 
     private Image loadImage(String path) {
@@ -55,7 +68,9 @@ public class MainWindow extends AnchorPane {
         tiggerImage = loadImage("/images/tigger.jpeg");
 
         String welcomeMessage = tigger.getWelcomeMessage();
-        dialogContainer.getChildren().add(DialogBox.getTiggerDialog(welcomeMessage, tiggerImage));
+        var welcome = DialogBox.getTiggerDialog(welcomeMessage, tiggerImage);
+        welcome.bindToParentWidth(dialogContainer.widthProperty());
+        dialogContainer.getChildren().add(welcome);
     }
 
     @FXML
@@ -74,9 +89,14 @@ public class MainWindow extends AnchorPane {
             assert e.toString().equals("Give me something I can understand!!") : "Unexpected TiggerException message";
         }
 
+        var userDialog = DialogBox.getUserDialog(input, userImage);
+        userDialog.bindToParentWidth(dialogContainer.widthProperty());
+        var tiggerDialog = DialogBox.getTiggerDialog(response, tiggerImage);
+        tiggerDialog.bindToParentWidth(dialogContainer.widthProperty());
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getTiggerDialog(response, tiggerImage)
+                userDialog,
+                tiggerDialog
         );
 
         storage.saveTasks(list);
@@ -85,7 +105,9 @@ public class MainWindow extends AnchorPane {
             String goodbye = """
                     Bye. Hope to see you again soon!
                     """;
-            dialogContainer.getChildren().add(DialogBox.getTiggerDialog(goodbye, tiggerImage));
+            var goodbyeDialog = DialogBox.getTiggerDialog(goodbye, tiggerImage);
+            goodbyeDialog.bindToParentWidth(dialogContainer.widthProperty());
+            dialogContainer.getChildren().add(goodbyeDialog);
             Platform.exit();
         }
 

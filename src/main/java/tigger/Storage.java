@@ -28,13 +28,11 @@ public class Storage {
         this.savedTasks = new File(path);
 
         try {
-            // Create parent directory if it doesn't exist
             File parent = savedTasks.getParentFile();
             if (parent != null && !parent.exists()) {
                 parent.mkdirs();
             }
 
-            // Create file if it doesn't exist
             if (!savedTasks.exists()) {
                 savedTasks.createNewFile();
             }
