@@ -15,7 +15,7 @@ public class Storage {
     private File savedTasks;
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    private boolean failedToLoad = false;
+    private boolean isFailingToLoad = false;
     private String loadErrorMessage = null;
 
     /**
@@ -77,7 +77,7 @@ public class Storage {
             }
 
         } catch (IOException e) {
-            this.failedToLoad = true;
+            this.isFailingToLoad = true;
             this.loadErrorMessage = "Error initializing storage file.";
         }
     }
@@ -94,7 +94,7 @@ public class Storage {
      * Returns true if loading the saved file failed
      */
     public boolean hasLoadError() {
-        return this.failedToLoad;
+        return this.isFailingToLoad;
     }
 
     /**

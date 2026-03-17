@@ -58,9 +58,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Bind the bubble's maximum width relative to a parent width (e.g., the dialog container).
-     * This keeps bubbles from stretching across the entire window and allows them to scale when
-     * the window is resized/fullscreened.
+     * Binds the maximum width of the dialog box to 70% of the parent width, allowing it to resize dynamically.
+     * @param parentWidth the ObservableNumberValue representing the width of the parent container
      */
     public void bindToParentWidth(ObservableNumberValue parentWidth) {
         // Limit bubble width to 70% of the parent width using a binding
