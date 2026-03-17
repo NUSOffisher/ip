@@ -43,35 +43,13 @@ public class Storage {
                     String task = reader.nextLine();
 
                     if (task.startsWith("T")) {
-                        String[] subCommand = task.split("[|]");
-                        ToDo todo = new ToDo(subCommand[2].trim());
-                        if (subCommand[1].trim().equals("1")) {
-                            todo.setDone();
-                        }
-                        taskList.add(todo);
+                        handleTodo(task);
 
                     } else if (task.startsWith("D")) {
-                        String[] subCommand = task.split("[|]");
-                        Deadline deadline = new Deadline(
-                                subCommand[2].trim(),
-                                subCommand[3].trim()
-                        );
-                        if (subCommand[1].trim().equals("1")) {
-                            deadline.setDone();
-                        }
-                        taskList.add(deadline);
+                        handleDeadline(task);
 
                     } else if (task.startsWith("E")) {
-                        String[] subCommand = task.split("[|]");
-                        Event event = new Event(
-                                subCommand[2].trim(),
-                                subCommand[3].trim(),
-                                subCommand[4].trim()
-                        );
-                        if (subCommand[1].trim().equals("1")) {
-                            event.setDone();
-                        }
-                        taskList.add(event);
+                        handleEvent(task);
                     }
                 }
             }
@@ -80,6 +58,52 @@ public class Storage {
             this.isFailingToLoad = true;
             this.loadErrorMessage = "Error initializing storage file.";
         }
+    }
+
+    /**
+     * Helper method to handle loading of ToDo tasks from the saved file.
+     * @param task saved task
+     */
+    public void handleTodo(String task) {
+        String[] subCommand = task.split("[|]");
+        ToDo todo = new ToDo(subCommand[2].trim());
+        if (subCommand[1].trim().equals("1")) {
+            todo.setDone();
+        }
+        taskList.add(todo);
+    }
+
+    /**
+     * Helper method to handle loading of Deadline tasks from the saved file.
+     * @param task saved task
+     */
+    public void handleDeadline(String task) {
+        String[] subCommand = task.split("[|]");
+        Deadline deadline = new Deadline(
+                subCommand[2].trim(),
+                subCommand[3].trim()
+        );
+        if (subCommand[1].trim().equals("1")) {
+            deadline.setDone();
+        }
+        taskList.add(deadline);
+    }
+
+    /**
+     * Helper method to handle loading of Event tasks from the saved file.
+     * @param task saved task
+     */
+    public void handleEvent(String task) {
+        String[] subCommand = task.split("[|]");
+        Event event = new Event(
+                subCommand[2].trim(),
+                subCommand[3].trim(),
+                subCommand[4].trim()
+        );
+        if (subCommand[1].trim().equals("1")) {
+            event.setDone();
+        }
+        taskList.add(event);
     }
 
     /**
