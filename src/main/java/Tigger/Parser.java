@@ -8,7 +8,7 @@ import java.util.Random;
  * Used GitHub Copilot to change the responses to be more Tigger-like.
  */
 public class Parser {
-    private static boolean waitingForTriviaAnswer = false;
+    private static boolean isWaitingWorTriviaAnswer = false;
     private static String currentTriviaAnswer = "";
     /**
      * Executes the command
@@ -23,8 +23,8 @@ public class Parser {
         }
         command = command.trim().toLowerCase();
 
-        if (waitingForTriviaAnswer) {
-            waitingForTriviaAnswer = false;
+        if (isWaitingWorTriviaAnswer) {
+            isWaitingWorTriviaAnswer = false;
             if (command.equalsIgnoreCase(currentTriviaAnswer)) {
                 return "Tigerrific! That's right! Tigger's proud of you!";
             } else {
@@ -243,7 +243,7 @@ public class Parser {
         String question = trivia.getQuestion(num);
 
         currentTriviaAnswer = trivia.getAnswer(num);
-        waitingForTriviaAnswer = true;
+        isWaitingWorTriviaAnswer = true;
         out.append("Ooh! Trivia time! Bounce and guess, tee-hee!:\n");
         out.append(question).append("\n");
     }
